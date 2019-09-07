@@ -1,19 +1,41 @@
+{% extends 'blog/base.html' %}
+{% load static %}
 <html>
-    <head>
-        <title>Django Girls blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="">Django Girls Blog</a></h1>
-        </div>
 
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+  <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  <title>Django Girls blog</title>
+</head>
+
+<body>
+  <div class="page-header">
+    <h1><a href="">Django Girls Blog</a></h1>
+  </div>
+
+
+  <div class="content container">
+    <div class="row">
+      <div class="col-md-8">
+        {% block content %}
         {% for post in posts %}
-      <div>
-          <p>published: {{ post.published_date }}</p>
-          <h1><a href="">{{ post.title }}</a></h1>
+        <div class="post">
+          <div class="date">
+            {{ post.published_date }}
+          </div>
+          <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
           <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+        {% endfor %}
+        {% endblock %}
       </div>
-  {% endfor %}
+    </div>
+  </div>
 
-    </body>
+</body>
+
 </html>
